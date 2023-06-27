@@ -1,12 +1,14 @@
 ﻿using MediatR;
 using Todo_App.Application.Common.Interfaces;
 using Todo_App.Domain.Entities;
+using Todo_App.Domain.ValueObjects;
 
 namespace Todo_App.Application.TodoLists.Commands.CreateTodoList;
 
 public record CreateTodoListCommand : IRequest<int>
 {
     public string? Title { get; init; }
+    public string? ColourCode { get; init; }
 }
 
 public class CreateTodoListCommandHandler : IRequestHandler<CreateTodoListCommand, int>
@@ -23,6 +25,10 @@ public class CreateTodoListCommandHandler : IRequestHandler<CreateTodoListComman
         var entity = new TodoList();
 
         entity.Title = request.Title;
+
+        if (request.ColourCode != null)
+            entity.Colour = Colour.From(request.ColourCode);
+
 
         _context.TodoLists.Add(entity);
 

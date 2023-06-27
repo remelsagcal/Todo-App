@@ -27,6 +27,16 @@ public class Colour : ValueObject
         return colour;
     }
 
+    public static bool ValidateColourCode(string? code)
+    {
+        if (string.IsNullOrEmpty(code))
+            return false;
+
+        var colour = new Colour { Code = code };
+
+        return SupportedColours.Contains(colour);
+    }
+
     public static Colour White => new("#FFFFFF");
 
     public static Colour Red => new("#FF5733");
