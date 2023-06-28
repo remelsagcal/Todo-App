@@ -1114,6 +1114,7 @@ export interface ITodoItemDto {
 
 export class CreateTodoListCommand implements ICreateTodoListCommand {
     title?: string | undefined;
+    colourCode?: string | undefined;
 
     constructor(data?: ICreateTodoListCommand) {
         if (data) {
@@ -1127,6 +1128,7 @@ export class CreateTodoListCommand implements ICreateTodoListCommand {
     init(_data?: any) {
         if (_data) {
             this.title = _data["title"];
+            this.colourCode = _data["colourCode"];
         }
     }
 
@@ -1140,17 +1142,20 @@ export class CreateTodoListCommand implements ICreateTodoListCommand {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["title"] = this.title;
+        data["colourCode"] = this.colourCode;
         return data;
     }
 }
 
 export interface ICreateTodoListCommand {
     title?: string | undefined;
+    colourCode?: string | undefined;
 }
 
 export class UpdateTodoListCommand implements IUpdateTodoListCommand {
     id?: number;
     title?: string | undefined;
+    colourCode?: string | undefined;
 
     constructor(data?: IUpdateTodoListCommand) {
         if (data) {
@@ -1165,6 +1170,7 @@ export class UpdateTodoListCommand implements IUpdateTodoListCommand {
         if (_data) {
             this.id = _data["id"];
             this.title = _data["title"];
+            this.colourCode = _data["colourCode"];
         }
     }
 
@@ -1179,6 +1185,7 @@ export class UpdateTodoListCommand implements IUpdateTodoListCommand {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["title"] = this.title;
+        data["colourCode"] = this.colourCode;
         return data;
     }
 }
@@ -1186,6 +1193,7 @@ export class UpdateTodoListCommand implements IUpdateTodoListCommand {
 export interface IUpdateTodoListCommand {
     id?: number;
     title?: string | undefined;
+    colourCode?: string | undefined;
 }
 
 export class WeatherForecast implements IWeatherForecast {

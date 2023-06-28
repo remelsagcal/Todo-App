@@ -2,6 +2,7 @@
 using Todo_App.Application.Common.Exceptions;
 using Todo_App.Application.Common.Interfaces;
 using Todo_App.Domain.Entities;
+using Todo_App.Domain.ValueObjects;
 
 namespace Todo_App.Application.TodoLists.Commands.UpdateTodoList;
 
@@ -10,6 +11,7 @@ public record UpdateTodoListCommand : IRequest
     public int Id { get; init; }
 
     public string? Title { get; init; }
+    public string? ColourCode { get; init; }
 }
 
 public class UpdateTodoListCommandHandler : IRequestHandler<UpdateTodoListCommand>
@@ -32,6 +34,8 @@ public class UpdateTodoListCommandHandler : IRequestHandler<UpdateTodoListComman
         }
 
         entity.Title = request.Title;
+        if (request.ColourCode != null)
+            entity.Colour = Colour.From(request.ColourCode);
 
         await _context.SaveChangesAsync(cancellationToken);
 
