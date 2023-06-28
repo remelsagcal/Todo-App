@@ -10,6 +10,13 @@ namespace Todo_App.WebUI.Controllers;
 
 public class TodoItemsController : ApiControllerBase
 {
+
+    [HttpGet("[action]")]
+    public async Task<ActionResult<List<string>>> GetTopTodoItemTags([FromQuery] GetTopTodoItemTagsQuery query)
+    {
+        return await Mediator.Send(query);
+    }
+
     [HttpGet]
     public async Task<ActionResult<PaginatedList<TodoItemBriefDto>>> GetTodoItemsWithPagination([FromQuery] GetTodoItemsWithPaginationQuery query)
     {
